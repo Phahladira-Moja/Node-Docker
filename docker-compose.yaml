@@ -1,0 +1,26 @@
+version: "3"
+services:
+  node-app: # Service name
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - mongo-db:/data/db
+      # for named mounts we provide name of mount and path in container
+      # named mounts can be used by multiple services
+
+volumes:
+  mongo-db:
+  # Here i'm declaring the mount name
+
+  # env_file:
+  #   - ./.env
+#This file will be for shared config
