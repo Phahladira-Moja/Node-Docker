@@ -19,6 +19,9 @@ services:
       # for named mounts we provide name of mount and path in container
       # named mounts can be used by multiple services
 
+  redis:
+    image: redis
+
 volumes:
   mongo-db:
   # Here i'm declaring the mount name
