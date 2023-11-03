@@ -6,6 +6,7 @@ const {
   MONGO_IP,
   MONGO_PORT,
 } = require("./config/config");
+const postRouter = require("./routes/postRoutes");
 
 const app = express();
 
@@ -18,7 +19,6 @@ const connectWithRetry = () => {
     .connect(mongoUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useFindAndModify: false,
     })
     .then(() => console.log("successfully connected to DB"))
     .catch((e) => {
@@ -29,9 +29,13 @@ const connectWithRetry = () => {
 
 connectWithRetry();
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   return res.send("<h2>Hi there</h2>");
 });
+
+app.use("/api/v1/posts", postRouter);
 
 const port = process.env.PORT || 3000;
 
